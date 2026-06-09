@@ -1,0 +1,38 @@
+/* ============================================================
+   freshen.css — a light visual refresh for Riverstick Industries.
+
+   This layer sits on top of the existing site. It makes NO changes
+   to the layout, structure, content, colours or fonts — only subtle,
+   modern polish (softer shadows, gently rounder corners, crisper
+   text, smoother scrolling, a nicer keyboard focus ring).
+
+   Fully reversible: delete this file and remove its <link> from
+   index.html to return to the original exactly.
+   ============================================================ */
+
+/* Crisper text rendering + smooth in-page scrolling */
+html { scroll-behavior: smooth; }
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Softer, more contemporary shadows (a subtle warm tint to match the brand) */
+.shadow-sm { box-shadow: 0 1px 2px rgba(60, 0, 0, .06); }
+.shadow,
+.shadow-md { box-shadow: 0 6px 20px -10px rgba(60, 0, 0, .14); }
+.shadow-lg { box-shadow: 0 16px 40px -16px rgba(60, 0, 0, .18); }
+.shadow-xl { box-shadow: 0 26px 55px -20px rgba(60, 0, 0, .22); }
+
+/* Gently rounder corners for a more current feel */
+.rounded-lg  { border-radius: 0.7rem; }
+.rounded-xl  { border-radius: 1rem; }
+.rounded-2xl { border-radius: 1.35rem; }
+
+/* A modern, accessible keyboard focus ring (only shows for keyboard users) */
+:focus-visible { outline: 2px solid #e2b43d; outline-offset: 3px; border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

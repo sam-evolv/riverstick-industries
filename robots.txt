@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://riverstickindustries.ie/sitemap.xml
+Sitemap: https://riverstick-industries.replit.app/sitemap.xml
