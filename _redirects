@@ -1,11 +1,5 @@
-# Serve route-specific metadata before the existing client-side routing fallback.
-/bark-mulch /seo/bark-mulch.html 200
-/bark-mulch/ /seo/bark-mulch.html 200
-/rubber-matting /seo/rubber-matting.html 200
-/rubber-matting/ /seo/rubber-matting.html 200
-/horse-walker-matting /seo/horse-walker-matting.html 200
-/horse-walker-matting/ /seo/horse-walker-matting.html 200
-/rubber-bricks /seo/rubber-bricks.html 200
-/rubber-bricks/ /seo/rubber-bricks.html 200
-/* /index.html 200
-
+/bark-mulch /bark-mulch.html 200
+/rubber-matting /rubber-matting.html 200
+/horse-walker-matting /horse-walker-matting.html 200
+/rubber-bricks /rubber-bricks.html 200
+/contact /#contact 302
