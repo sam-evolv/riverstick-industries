@@ -1,142 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-    <title>Riverstick Industries - Premium Industrial Materials | Cork, Ireland</title>
-    
-    <!-- Favicon with correct MIME type -->
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
-    <meta name="description" content="Premium bark mulch, rubber matting, horse walker matting & rubber bricks. Quality Irish industrial materials with expert support and fast delivery across Cork." />
-    <meta name="keywords" content="bark mulch, rubber matting, horse walker matting, rubber bricks, industrial materials, Cork, Ireland, Riverstick" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://www.riverstickindustries.ie/" />
-    
-    <!-- Enhanced Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src * data: blob:; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://replit.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; upgrade-insecure-requests;" />
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
-    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
-    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
-    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
-    <meta http-equiv="Cross-Origin-Embedder-Policy" content="require-corp" />
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Riverstick Industries - Premium Industrial Materials" />
-    <meta property="og:description" content="Premium bark mulch, rubber matting, horse walker matting & rubber bricks. Quality Irish industrial materials with expert support." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.riverstickindustries.ie/" />
-    <meta property="og:locale" content="en_IE" />
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Riverstick Industries - Premium Industrial Materials" />
-    <meta name="twitter:description" content="Premium bark mulch, rubber matting, horse walker matting & rubber bricks. Quality Irish industrial materials." />
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Critical LCP image preload with optimized mobile-first approach -->
-    <link rel="preload" href="/images/bark-mulch-hero-mobile-hq.webp" as="image" type="image/webp" media="(max-width: 768px)" fetchpriority="high" />
-    <link rel="preload" href="/images/bark-mulch-hero.webp" as="image" type="image/webp" media="(min-width: 769px)" fetchpriority="high" />
-    <link rel="preload" href="/images/riverstick_industries_logo_transparent_1754573868445.png" as="image" type="image/png" fetchpriority="high" />
-    <!-- Font preloading with display=swap for better performance -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-    </noscript>
-    
-    <!-- Inline critical CSS for above-the-fold content - Mobile Performance Optimized -->
-    <style>
-      /* Critical LCP optimization - Hero carousel performance-first */
-      .hero-carousel{position:relative;height:100vh;overflow:hidden;contain:strict;content-visibility:auto}
-      .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.5s ease-in-out;will-change:opacity;contain:layout style paint}
-      .hero-slide.active{opacity:1;will-change:auto}
-      .hero-slide img{width:100%;height:100%;-o-object-fit:cover;object-fit:cover;image-rendering:optimize-quality;transform:translateZ(0);contain:size layout style}
-      .hero-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;color:white;z-index:10;contain:style}
-      /* Optimized button for first interaction */
-      .btn-gold{background:#e2b43d;color:white;padding:1rem 2rem;border-radius:0.5rem;text-decoration:none;display:inline-flex;align-items:center;transition:transform 0.2s ease,box-shadow 0.2s ease;will-change:transform}
-      .btn-gold:hover{transform:translateY(-2px) translateZ(0);box-shadow:0 8px 20px rgba(0,0,0,0.15)}
-      /* Navigation with performance containment */
-      .navigation{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(255,255,255,0.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);contain:layout style paint;content-visibility:auto}
-      /* Performance-critical image loading */
-      img{image-rendering:optimize-quality;transform:translateZ(0);contain:size layout}
-      /* Minimal focus styles for accessibility */
-      button:focus,a:focus{outline:2px solid #e2b43d;outline-offset:2px}
-      .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
-      /* Mobile-first performance optimizations */
-      @media (max-width:768px){
-        .hero-carousel{height:100vh;contain:strict}
-        .btn-gold{padding:0.75rem 1.5rem;font-size:1rem}
-      }
-    </style>
-    
-    <!-- Structured Data for Business -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Riverstick Industries",
-      "description": "Premium industrial materials including bark mulch, rubber matting, horse walker matting, and rubber bricks",
-      "url": "https://www.riverstickindustries.ie",
-      "logo": "https://www.riverstickindustries.ie/images/riverstick_industries_logo_transparent.png",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Curra, Riverstick",
-        "addressLocality": "Cork",
-        "addressCountry": "Ireland",
-        "postalCode": "P43 EY24"
-      },
-      "telephone": "+353214771362",
-      "openingHours": ["Mo-Fr 09:00-17:30"],
-      "sameAs": []
-    }
-    </script>
-    <script src="/seo-metadata.js" defer></script>
-    <script type="module" crossorigin src="/assets/index-donworth-studio.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-cqade6jy.css">
-    <!-- Light visual refresh layered on top of the existing build -->
-    <link rel="stylesheet" href="/freshen.css">
-  </head>
-  <body>
-    <div id="root"></div>
-    
-    <!-- Optimized performance monitoring - Mobile LCP focused -->
-    <script>
-      // Mobile performance optimization - DOMContentLoaded for faster execution
-      window.addEventListener('DOMContentLoaded', function() {
-        // Apply performance containment to images for faster rendering
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-          if (!img.style.contain) {
-            img.style.contain = 'size layout style';
-          }
-          // Ensure proper aspect ratios to prevent layout shifts
-          if (!img.width && !img.height) {
-            img.loading = 'lazy';
-          }
-        });
-        
-        // Preload next hero image for carousel performance
-        const nextHeroImage = new Image();
-        nextHeroImage.src = '/images/rubber-matting-hero-mobile-hq.webp';
-      });
-      
-      // Minimal error handling - suppresses non-critical console errors
-      window.addEventListener('error', function(e) {
-        if (e.error && (e.error.name === 'ResizeObserver' || e.error.name === 'ChunkLoadError' || e.message?.includes('ResizeObserver'))) {
-          e.preventDefault();
-          return false;
-        }
-      }, true);
-    </script>
-  </body>
-</html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Riverstick Industries | Premium Industrial Materials | Cork, Ireland</title>
+<meta name="description" content="Premium bark mulch, rubber matting, horse walker matting and rubber bricks. Quality Irish industrial materials since 1968, with expert support and fast delivery across Cork.">
+<link rel="canonical" href="https://www.riverstickindustries.ie/">
+<meta name="theme-color" content="#140b0c">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Riverstick Industries">
+<meta property="og:title" content="Riverstick Industries | Premium Industrial Materials | Cork, Ireland">
+<meta property="og:description" content="Premium bark mulch, rubber matting, horse walker matting and rubber bricks. Quality Irish industrial materials since 1968, with expert support and fast delivery across Cork.">
+<meta property="og:url" content="https://www.riverstickindustries.ie/">
+<meta property="og:image" content="https://www.riverstickindustries.ie/images/og-image.jpg">
+<meta property="og:locale" content="en_IE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Riverstick Industries | Premium Industrial Materials | Cork, Ireland">
+<meta name="twitter:description" content="Premium bark mulch, rubber matting, horse walker matting and rubber bricks. Quality Irish industrial materials since 1968, with expert support and fast delivery across Cork.">
+<meta name="twitter:image" content="https://www.riverstickindustries.ie/images/og-image.jpg">
+<link rel="preload" as="image" href="/images/bark-mulch-hero-960.webp" media="(max-width: 960px)" fetchpriority="high"><link rel="preload" as="image" href="/images/bark-mulch-hero-1600.webp" media="(min-width: 961px)" fetchpriority="high">
+<link rel="preload" href="/fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/css/site.css?v=a48fb2630e">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","@id":"https://www.riverstickindustries.ie/#business","name":"Riverstick Industries","description":"Premium industrial materials including bark mulch, rubber matting, horse walker matting, and rubber bricks.","url":"https://www.riverstickindustries.ie/","logo":"https://www.riverstickindustries.ie/images/logo-full.png","image":"https://www.riverstickindustries.ie/images/og-image.jpg","telephone":"+353214771362","foundingDate":"1968","address":{"@type":"PostalAddress","streetAddress":"Curra, Riverstick","addressLocality":"Cork","addressRegion":"Co. Cork","postalCode":"P43 EY24","addressCountry":"IE"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"17:30"}],"hasMap":"https://www.google.com/maps/search/?api=1&query=Curra,+Riverstick,+Co.+Cork,+Ireland+P43+EY24"}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label="Riverstick Industries home">
+      <img class="brand-mark" src="/images/logo-mark.webp" width="47" height="51" alt="">
+      <img class="brand-word" src="/images/logo-wordmark.webp" width="191" height="51" alt="Riverstick Industries">
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/" aria-current="page">Home</a>
+      <a href="/#products">Products</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+      <a class="btn" href="tel:+353214771362"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call Now</a>
+    </nav>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu">
+  <nav aria-label="Mobile navigation">
+    <a href="/">Home <small>01</small></a>
+    <a href="/#products">Products <small>02</small></a>
+    <a href="/#about">About <small>03</small></a>
+    <a href="/#contact">Contact <small>04</small></a>
+  </nav>
+  <a class="btn" href="tel:+353214771362"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call 021 477 1362</a>
+  <p class="mm-meta">Mon to Fri, 9:00 to 17:30</p>
+</div>
 
+<main id="main">
+<section class="hero" data-carousel aria-roledescription="carousel" aria-label="Our products">
+  <div class="hero-slides"><div class="hero-slide is-active"><img src="/images/bark-mulch-hero-1600.webp" srcset="/images/bark-mulch-hero-960.webp 960w, /images/bark-mulch-hero-1600.webp 1600w" sizes="100vw" alt="Premium Bark Mulch" fetchpriority="high" decoding="async"></div><div class="hero-slide"><img src="/images/rubber-matting-hero-1600.webp" srcset="/images/rubber-matting-hero-960.webp 960w, /images/rubber-matting-hero-1600.webp 1600w" sizes="100vw" alt="Industrial Rubber Matting" loading="lazy" decoding="async"></div><div class="hero-slide"><img src="/images/horse-walker-hero-1600.webp" srcset="/images/horse-walker-hero-960.webp 960w, /images/horse-walker-hero-1600.webp 1600w" sizes="100vw" alt="Horse Walker Matting" loading="lazy" decoding="async"></div><div class="hero-slide"><img src="/images/rubber-bricks-hero-1600.webp" srcset="/images/rubber-bricks-hero-960.webp 960w, /images/rubber-bricks-hero-1600.webp 1600w" sizes="100vw" alt="Rubber Bricks" loading="lazy" decoding="async"></div></div>
+  <div class="hero-body">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow light">Est. 1968 · Riverstick, Co. Cork</span>
+        <h1 class="display">Premium industrial materials, <em>built to last.</em></h1>
+        <p class="lead">Bark mulch, rubber matting, horse walker matting and rubber bricks for commercial, industrial and residential clients throughout Ireland and beyond.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="tel:+353214771362"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call to Order</a>
+          <a class="btn btn-ghost" href="#products">Explore Products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arrow"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav class="hero-rail" aria-label="Carousel navigation"><div class="wrap"><ol><li class="is-active"><button type="button" aria-label="Show Premium Bark Mulch"><span class="bar"><i></i></span><span class="num">01</span><span class="t">Premium Bark Mulch</span><span class="d">Professional landscaping materials for every project</span></button></li><li><button type="button" aria-label="Show Industrial Rubber Matting"><span class="bar"><i></i></span><span class="num">02</span><span class="t">Industrial Rubber Matting</span><span class="d">Durable flooring solutions for commercial spaces</span></button></li><li><button type="button" aria-label="Show Horse Walker Matting"><span class="bar"><i></i></span><span class="num">03</span><span class="t">Horse Walker Matting</span><span class="d">Specialised equestrian solutions for training facilities</span></button></li><li><button type="button" aria-label="Show Rubber Bricks"><span class="bar"><i></i></span><span class="num">04</span><span class="t">Rubber Bricks</span><span class="d">Interlocking rubber brick flooring for versatile applications</span></button></li></ol></div></nav>
+</section>
+
+<section class="trust" aria-label="Why Riverstick">
+  <div class="wrap">
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.48 12.89 17 22l-5-3-5 3 1.52-9.11"/></svg></span><span>Since 1968<small>Over five decades of trust</small></span></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><span>Quality Guaranteed<small>Built to the highest standards</small></span></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 9.38a1 1 0 0 0-.78-.38H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span><span>Fast Delivery<small>Across Cork and beyond</small></span></div>
+    <div class="trust-item"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span><span>Expert Support<small>Talk to our experienced team</small></span></div>
+  </div>
+</section>
+
+<section class="section" id="products" aria-labelledby="products-title">
+  <div class="wrap">
+    <div class="section-head">
+      <div data-reveal>
+        <span class="eyebrow">Our Product Range</span>
+        <h2 class="h2" id="products-title">Materials for every <em>surface and setting.</em></h2>
+      </div>
+      <p class="lead" data-reveal style="--d:.1s">Discover our comprehensive selection of premium industrial materials, each crafted to meet the highest standards of quality and durability.</p>
+    </div>
+    <div class="products">
+    <a class="p-card" href="/bark-mulch" data-reveal style="--d:0.00s">
+      <div class="p-media"><img src="/images/bark-mulch-card-1600.webp" srcset="/images/bark-mulch-card-960.webp 960w, /images/bark-mulch-card-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Premium Bark Mulch" loading="lazy" decoding="async"><span class="tag">01</span></div>
+      <div class="p-body">
+        <h3 class="h3">Premium Bark Mulch</h3>
+        <p>Natural wood-based mulch perfect for landscaping, garden beds, and erosion control. Available in various sizes and colours.</p>
+        <span class="link-arrow">More Info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </div>
+    </a>
+    <a class="p-card" href="/rubber-matting" data-reveal style="--d:0.08s">
+      <div class="p-media"><img src="/images/rubber-matting-card-1600.webp" srcset="/images/rubber-matting-card-960.webp 960w, /images/rubber-matting-card-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Industrial Rubber Matting" loading="lazy" decoding="async"><span class="tag">02</span></div>
+      <div class="p-body">
+        <h3 class="h3">Industrial Rubber Matting</h3>
+        <p>High-quality rubber flooring solutions for commercial and industrial applications. Slip-resistant and durable.</p>
+        <span class="link-arrow">More Info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </div>
+    </a>
+    <a class="p-card" href="/horse-walker-matting" data-reveal style="--d:0.00s">
+      <div class="p-media"><img src="/images/horse-walker-card-1600.webp" srcset="/images/horse-walker-card-960.webp 960w, /images/horse-walker-card-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Horse Walker Matting" loading="lazy" decoding="async"><span class="tag">03</span></div>
+      <div class="p-body">
+        <h3 class="h3">Horse Walker Matting</h3>
+        <p>Specialised equestrian flooring designed for horse walkers and training facilities. Provides excellent grip and comfort.</p>
+        <span class="link-arrow">More Info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </div>
+    </a>
+    <a class="p-card" href="/rubber-bricks" data-reveal style="--d:0.08s">
+      <div class="p-media"><img src="/images/rubber-bricks-card-1600.webp" srcset="/images/rubber-bricks-card-960.webp 960w, /images/rubber-bricks-card-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 50vw" alt="Rubber Bricks" loading="lazy" decoding="async"><span class="tag">04</span></div>
+      <div class="p-body">
+        <h3 class="h3">Rubber Bricks</h3>
+        <p>Interlocking rubber brick flooring system perfect for patios, walkways, and commercial spaces. Durable, slip-resistant, and easy to install.</p>
+        <span class="link-arrow">More Info <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </div>
+    </a>
+    </div>
+  </div>
+</section>
+
+
+<section class="section on-dark about" id="about" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-copy" data-reveal>
+        <span class="eyebrow">Our Story</span>
+        <h2 class="h2" id="about-title">Industrial excellence <em>since 1968.</em></h2>
+        <p>Riverstick Industries has been a trusted name in premium industrial materials for over five decades. We specialise in providing high-quality bark mulch, rubber matting, and specialised flooring solutions to commercial, industrial, and residential clients.</p>
+        <p>Our commitment to quality, reliability, and customer service has made us the preferred choice for contractors, landscapers, and facility managers throughout Ireland and beyond.</p>
+      </div>
+      <div class="about-visual" data-reveal style="--d:.12s" aria-hidden="true">
+        <img src="/images/logo-full.webp" width="426" height="520" alt="" loading="lazy">
+      </div>
+    </div>
+    <div class="pillars">
+      <div class="pillar" data-reveal><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Quality Guaranteed</h3><p>Every material crafted to meet the highest standards of quality and durability.</p></div>
+      <div class="pillar" data-reveal style="--d:.08s"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 9.38a1 1 0 0 0-.78-.38H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span><h3>Fast Delivery</h3><p>Reliable delivery across Cork, with collection also available on bark mulch.</p></div>
+      <div class="pillar" data-reveal style="--d:.16s"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span><h3>Expert Support</h3><p>An experienced team on hand to help you find the perfect materials for your needs.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-grid">
+    <div class="contact-copy" data-reveal>
+      <span class="eyebrow">Get In Touch</span>
+      <h2 class="h2" id="contact-title">Let's talk about <em>your project.</em></h2>
+      <p class="lead">Ready to discuss your project? Our experienced team is here to help you find the perfect materials for your needs.</p>
+      <a class="phone-big" href="tel:+353214771362" aria-label="Call 021 477 1362"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>021 477 1362</a>
+      <div class="info-grid">
+        <div class="info">
+          <h3>Address</h3>
+          <address>Curra, Riverstick<br>Co. Cork, Ireland<br>P43 EY24</address>
+        </div>
+        <div class="info">
+          <h3>Opening Hours</h3>
+          <dl class="hours">
+            <dt>Mon to Fri</dt><dd>9:00 to 17:30</dd>
+            <dt>Saturday</dt><dd>Closed</dd>
+            <dt>Sunday</dt><dd>Closed</dd>
+          </dl>
+          <span class="status" data-open-status hidden></span>
+        </div>
+      </div>
+      <div class="contact-ctas">
+        <a class="btn btn-dark" href="tel:+353214771362"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Call Now for Quote</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=Curra,+Riverstick,+Co.+Cork,+Ireland+P43+EY24" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Get Directions</a>
+      </div>
+    </div>
+    <div class="map-card" data-reveal style="--d:.12s">
+      <div class="map-frame">
+        <a class="map-fallback" href="https://www.google.com/maps/search/?api=1&query=Curra,+Riverstick,+Co.+Cork,+Ireland+P43+EY24" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><span class="pin"></span><span>Open in Google Maps</span></a>
+        <iframe title="Map showing Riverstick Industries, Curra, Riverstick, Co. Cork" src="https://www.google.com/maps?q=Curra%2C%20Riverstick%2C%20Co.%20Cork%2C%20P43%20EY24&z=12&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div class="map-meta">
+        <div>
+          <h3>Find Us Here</h3>
+          <address>Curra, Riverstick, Co. Cork, Ireland, P43 EY24</address>
+        </div>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Curra,+Riverstick,+Co.+Cork,+Ireland+P43+EY24" target="_blank" rel="noopener noreferrer">Open in Google Maps <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="arrow"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+      </div>
+      <p class="map-note">Get precise directions and explore the area around our Riverstick location.</p>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="/images/logo-full.webp" width="150" height="183" alt="Riverstick Industries, established 1968" loading="lazy">
+        <p>A trusted name in premium industrial materials for over five decades. Quality Irish materials with expert support.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul><li><a href="/bark-mulch">Bark Mulch</a></li><li><a href="/rubber-matting">Rubber Matting</a></li><li><a href="/horse-walker-matting">Horse Walker Matting</a></li><li><a href="/rubber-bricks">Rubber Bricks</a></li></ul>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#products">Products</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact Info</h4>
+        <a class="f-phone" href="tel:+353214771362">021 477 1362</a>
+        <address>Curra, Riverstick<br>Co. Cork, Ireland<br>P43 EY24</address>
+        <p class="f-hours">Mon to Fri: 9:00 to 17:30<br>Sat and Sun: Closed</p>
+      </div>
+    </div>
+  </div>
+  <div class="footer-word" aria-hidden="true">Riverstick</div>
+  <div class="wrap">
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Riverstick Industries. All rights reserved.</span>
+      <a href="https://donworthstudio.ie/" target="_blank" rel="noopener noreferrer"><img src="/images/donworth-d-emblem.svg" width="16" height="16" alt="">Designed &amp; Developed by Donworth Studio</a>
+    </div>
+  </div>
+</footer>
+<a class="fab" href="tel:+353214771362" aria-label="Call Riverstick Industries on 021 477 1362"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
+<script src="/js/site.js?v=a48fb2630e" defer></script>
+</body>
+</html>
