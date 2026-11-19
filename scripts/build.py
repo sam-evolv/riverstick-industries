@@ -14,7 +14,7 @@ SITE = "https://www.riverstickindustries.ie"
 PHONE_DISPLAY = "021 477 1362"
 PHONE_TEL = "+353214771362"
 MAPS = "https://www.google.com/maps/search/?api=1&query=Curra,+Riverstick,+Co.+Cork,+Ireland+P43+EY24"
-MAP_EMBED = "https://maps.google.com/maps?q=Curra%2C%20Riverstick%2C%20Co.%20Cork%2C%20P43%20EY24&z=12&output=embed"
+MAP_EMBED = "https://www.google.com/maps?q=Curra%2C%20Riverstick%2C%20Co.%20Cork%2C%20P43%20EY24&z=12&output=embed"
 ADDRESS_HTML = "Curra, Riverstick<br>Co. Cork, Ireland<br>P43 EY24"
 
 ICONS = {
@@ -208,7 +208,7 @@ def footer():
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="/images/logo-full.webp" width="150" height="227" alt="Riverstick Industries, established 1968" loading="lazy">
+        <img src="/images/logo-full.webp" width="150" height="183" alt="Riverstick Industries, established 1968" loading="lazy">
         <p>A trusted name in premium industrial materials for over five decades. Quality Irish materials with expert support.</p>
       </div>
       <div>
@@ -258,7 +258,7 @@ def picture(img, alt, eager=False, sizes="100vw", cls=""):
 def product_card(p, i, small=False):
     h = "h3"
     return f"""<a class="p-card" href="/{p['slug']}" data-reveal style="--d:{(i % 2) * .08 if not small else i * .08:.2f}s">
-      <div class="p-media">{picture(p['img'], p['name'], sizes='(max-width: 900px) 100vw, 50vw')}<span class="tag">{i + 1:02d}</span></div>
+      <div class="p-media">{picture(p['img'] + '-card', p['name'], sizes='(max-width: 900px) 100vw, 50vw')}<span class="tag">{i + 1:02d}</span></div>
       <div class="p-body">
         <h3 class="{h}">{p['name']}</h3>
         {'' if small else f"<p>{p['card']}</p>"}
@@ -297,7 +297,7 @@ def contact_section():
     </div>
     <div class="map-card" data-reveal style="--d:.12s">
       <div class="map-frame">
-        <div class="map-fallback" aria-hidden="true"><span class="pin"></span><span>Curra, Riverstick, Co. Cork</span></div>
+        <a class="map-fallback" href="{MAPS}" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true"><span class="pin"></span><span>Open in Google Maps</span></a>
         <iframe title="Map showing Riverstick Industries, Curra, Riverstick, Co. Cork" src="{MAP_EMBED}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div class="map-meta">
@@ -315,7 +315,7 @@ def contact_section():
 
 def home():
     slides = "".join(
-        f'<div class="hero-slide{" is-active" if i == 0 else ""}">{picture(p["img"], p["name"], eager=(i == 0))}</div>'
+        f'<div class="hero-slide{" is-active" if i == 0 else ""}">{picture(p["img"] + "-hero", p["name"], eager=(i == 0))}</div>'
         for i, p in enumerate(PRODUCTS))
     rail = "".join(
         f'<li{" class=\"is-active\"" if i == 0 else ""}><button type="button" aria-label="Show {p["name"]}">'
@@ -328,7 +328,7 @@ def home():
     marquee = "".join(f"<span>{s}</span>" for s in sectors) * 2
     return head("Riverstick Industries | Premium Industrial Materials | Cork, Ireland",
                 "Premium bark mulch, rubber matting, horse walker matting and rubber bricks. Quality Irish industrial materials since 1968, with expert support and fast delivery across Cork.",
-                "/", preload="bark-mulch") + header("home") + f"""
+                "/", preload="bark-mulch-hero") + header("home") + f"""
 <main id="main">
 <section class="hero" data-carousel aria-roledescription="carousel" aria-label="Our products">
   <div class="hero-slides">{slides}</div>
@@ -383,7 +383,7 @@ def home():
         <p>Our commitment to quality, reliability, and customer service has made us the preferred choice for contractors, landscapers, and facility managers throughout Ireland and beyond.</p>
       </div>
       <div class="about-visual" data-reveal style="--d:.12s" aria-hidden="true">
-        <img src="/images/logo-full.webp" width="347" height="520" alt="" loading="lazy">
+        <img src="/images/logo-full.webp" width="426" height="520" alt="" loading="lazy">
       </div>
     </div>
     <div class="pillars">
@@ -419,13 +419,13 @@ def product_page(idx):
         {"@type": "ListItem", "position": 2, "name": "Products", "item": SITE + "/#products"},
         {"@type": "ListItem", "position": 3, "name": p["name"], "item": f"{SITE}/{p['slug']}"}]}
     product_ld = {"@context": "https://schema.org", "@type": "Product", "name": p["name"], "description": p["meta"],
-                  "image": f"{SITE}/images/{p['img']}-1600.webp", "brand": {"@type": "Brand", "name": "Riverstick Industries"},
+                  "image": f"{SITE}/images/{p['img']}-hero-1600.webp", "brand": {"@type": "Brand", "name": "Riverstick Industries"},
                   "manufacturer": {"@id": SITE + "/#business"}}
     title = f"{p['name']} | Riverstick Industries, Cork"
-    return head(title, p["meta"], f"/{p['slug']}", preload=p["img"], extra_ld=[crumbs_ld, product_ld]) + header("products") + f"""
+    return head(title, p["meta"], f"/{p['slug']}", preload=p["img"] + "-hero", extra_ld=[crumbs_ld, product_ld]) + header("products") + f"""
 <main id="main">
 <section class="p-hero">
-  {picture(p['img'], p['name'], eager=True)}
+  {picture(p['img'] + '-hero', p['name'], eager=True)}
   <div class="wrap">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a>{icon('chev')}<a href="/#products">Products</a>{icon('chev')}<span aria-current="page">{p['short']}</span></nav>
     <div class="hero-copy">
@@ -453,6 +453,10 @@ def product_page(idx):
       <div class="benefits">{benefits}</div>
     </div>
     <div class="detail-grid">{details}</div>
+    <div class="gallery" data-reveal>
+      <figure>{picture(p['img'] + '-card', p['name'] + ' in use', sizes='(max-width: 900px) 100vw, 60vw')}</figure>
+      <figure>{picture(p['img'] + '-detail', p['name'] + ' close up', sizes='(max-width: 900px) 100vw, 40vw')}</figure>
+    </div>
   </div>
 </section>
 
