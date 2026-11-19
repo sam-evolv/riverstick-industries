@@ -8,7 +8,7 @@ Static site. No framework, no npm, no build step needed to deploy.
 - `css/site.css`, `js/site.js`: styles and behaviour
 - `fonts/`: self-hosted Instrument Serif + Inter (no Google requests)
 - `images/`: optimised webp (960w and 1600w per product), logo, icons, og-image
-- `vercel.json`: clean URLs (`/bark-mulch` serves `bark-mulch.html`), security headers, caching
+- Hosted on Netlify: `_headers` sets security + caching headers; Netlify pretty URLs serve `/bark-mulch` from `bark-mulch.html`. `vercel.json` mirrors this if it ever moves to Vercel.
 
 ## Edit copy
 1. Change text in `scripts/build.py`
