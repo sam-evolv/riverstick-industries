@@ -471,3 +471,19 @@ a:hover > .link-arrow svg, .link-arrow:hover svg { transform: translateX(4px); }
 .map-fallback { background: var(--stone) !important; gap: 14px !important; }
 
 .fab { background: var(--ink); color: var(--paper); box-shadow: 0 8px 24px -8px rgba(0,0,0,.45), 0 0 0 1px rgba(246,241,233,.12); }
+
+/* Our Story logo: always centred in its panel */
+.about-visual { display: flex; align-items: center; justify-content: center; padding: 14%; }
+.about-visual img { width: 100%; height: 100%; max-width: none; aspect-ratio: auto; object-fit: contain; margin: 0; }
+
+/* Footer on mobile: centred and evenly spaced */
+@media (max-width: 640px) {
+  .footer { padding-top: 64px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 44px 16px; text-align: center; padding-bottom: 48px; }
+  .footer-brand, .footer-top > div:last-child { grid-column: 1 / -1; }
+  .footer-brand img { width: 120px; margin: 0 auto; }
+  .footer-brand p { margin: 20px auto 0; max-width: 30em; }
+  .footer h4 { margin-bottom: 16px; }
+  .footer .f-phone { font-size: 34px; }
+  .footer-bottom { flex-direction: column; align-items: center; text-align: center; gap: 10px; padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+}
