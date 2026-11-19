@@ -179,8 +179,8 @@ def header(active=None):
 <header class="header">
   <div class="wrap header-inner">
     <a class="brand" href="/" aria-label="Riverstick Industries home">
-      <img class="brand-mark" src="/images/logo-mark.webp" width="54" height="58" alt="">
-      <img class="brand-word" src="/images/logo-wordmark.webp" width="218" height="58" alt="Riverstick Industries">
+      <img class="brand-mark" src="/images/logo-mark.webp" width="47" height="51" alt="">
+      <img class="brand-word" src="/images/logo-wordmark.webp" width="191" height="51" alt="Riverstick Industries">
     </a>
     <nav class="nav" aria-label="Main navigation">
       <a href="/"{cur('home')}>Home</a>
