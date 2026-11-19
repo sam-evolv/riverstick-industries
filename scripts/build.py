@@ -146,7 +146,7 @@ def head(title, desc, path, preload=None, extra_ld=None):
 <title>{escape(title)}</title>
 <meta name="description" content="{escape(desc)}">
 <link rel="canonical" href="{url}">
-<meta name="theme-color" content="#140b0c">
+<meta name="theme-color" content="#f7f5f1">
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -176,28 +176,27 @@ def header(active=None):
 <header class="header">
   <div class="wrap header-inner">
     <a class="brand" href="/" aria-label="Riverstick Industries home">
-      <img src="/images/logo-mark.webp" width="34" height="37" alt="">
-      <span class="brand-name"><b>Riverstick</b><small>Industries · Est. 1968</small></span>
+      <img src="/images/logo-mark.webp" width="26" height="28" alt="">
+      <span>Riverstick Industries</span>
     </a>
     <nav class="nav" aria-label="Main navigation">
-      <a href="/"{cur('home')}>Home</a>
       <a href="/#products"{cur('products')}>Products</a>
       <a href="/#about">About</a>
       <a href="/#contact">Contact</a>
-      <a class="btn" href="tel:{PHONE_TEL}">{icon('phone')}Call Now</a>
+      <a class="btn btn-sm" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a>
     </nav>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span></button>
   </div>
 </header>
 <div class="mobile-menu" id="mobile-menu">
   <nav aria-label="Mobile navigation">
-    <a href="/">Home <small>01</small></a>
-    <a href="/#products">Products <small>02</small></a>
-    <a href="/#about">About <small>03</small></a>
-    <a href="/#contact">Contact <small>04</small></a>
+    <a href="/">Home</a>
+    <a href="/#products">Products</a>
+    <a href="/#about">About</a>
+    <a href="/#contact">Contact</a>
   </nav>
-  <a class="btn" href="tel:{PHONE_TEL}">{icon('phone')}Call {PHONE_DISPLAY}</a>
-  <p class="mm-meta">Mon to Fri, 9:00 to 17:30</p>
+  <a class="btn" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a>
+  <p class="mm-meta">Monday to Friday, 9:00 to 17:30</p>
 </div>
 """
 
@@ -208,36 +207,32 @@ def footer():
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="/images/logo-full.webp" width="150" height="227" alt="Riverstick Industries, established 1968" loading="lazy">
-        <p>A trusted name in premium industrial materials for over five decades. Quality Irish materials with expert support.</p>
+        <img src="/images/logo-full.webp" width="84" height="127" alt="Riverstick Industries, established 1968" loading="lazy">
       </div>
       <div>
         <h4>Products</h4>
         <ul>{plinks}</ul>
       </div>
       <div>
-        <h4>Quick Links</h4>
+        <h4>Company</h4>
         <ul>
           <li><a href="/">Home</a></li>
-          <li><a href="/#products">Products</a></li>
           <li><a href="/#about">About</a></li>
           <li><a href="/#contact">Contact</a></li>
-          <li><a href="tel:{PHONE_TEL}">Call Now</a></li>
         </ul>
       </div>
       <div>
-        <h4>Contact Info</h4>
-        <a class="f-phone" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>
-        <address>{ADDRESS_HTML}</address>
-        <p class="f-hours">Mon to Fri: 9:00 to 17:30<br>Sat and Sun: Closed</p>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li>
+          <li><address>{ADDRESS_HTML}</address></li>
+          <li class="muted">Mon to Fri, 9:00 to 17:30<br>Sat and Sun, Closed</li>
+        </ul>
       </div>
     </div>
-  </div>
-  <div class="footer-word" aria-hidden="true">Riverstick</div>
-  <div class="wrap">
     <div class="footer-bottom">
       <span>© <span data-year>{datetime.date.today().year}</span> Riverstick Industries. All rights reserved.</span>
-      <a href="https://donworthstudio.ie/" target="_blank" rel="noopener noreferrer"><img src="/images/donworth-d-emblem.svg" width="16" height="16" alt="">Designed &amp; Developed by Donworth Studio</a>
+      <a href="https://donworthstudio.ie/" target="_blank" rel="noopener noreferrer">Designed &amp; Developed by Donworth Studio</a>
     </div>
   </div>
 </footer>
@@ -248,123 +243,99 @@ def footer():
 """
 
 
-def picture(img, alt, eager=False, sizes="100vw", cls=""):
+def picture(img, alt, eager=False, sizes="100vw"):
     load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
-    c = f' class="{cls}"' if cls else ""
-    return (f'<img{c} src="/images/{img}-1600.webp" srcset="/images/{img}-960.webp 960w, /images/{img}-1600.webp 1600w" '
+    return (f'<img src="/images/{img}-1600.webp" srcset="/images/{img}-960.webp 960w, /images/{img}-1600.webp 1600w" '
             f'sizes="{sizes}" alt="{escape(alt)}" {load}>')
 
 
-def product_card(p, i, small=False):
-    h = "h3"
-    return f"""<a class="p-card" href="/{p['slug']}" data-reveal style="--d:{(i % 2) * .08 if not small else i * .08:.2f}s">
-      <div class="p-media">{picture(p['img'], p['name'], sizes='(max-width: 900px) 100vw, 50vw')}<span class="tag">{i + 1:02d}</span></div>
+def product_card(p, short=False, sizes="(max-width: 900px) 100vw, 50vw"):
+    desc = "" if short else f"<p>{p['card']}</p>"
+    return f"""<a class="p-card" href="/{p['slug']}" data-reveal>
+      <div class="p-media">{picture(p['img'], p['name'], sizes=sizes)}</div>
       <div class="p-body">
-        <h3 class="{h}">{p['name']}</h3>
-        {'' if small else f"<p>{p['card']}</p>"}
-        <span class="link-arrow">More Info {icon('arrow')}</span>
+        <div class="p-title"><h3>{p['name']}</h3>{icon('arrow')}</div>
+        {desc}
       </div>
     </a>"""
 
 
 def contact_section():
     return f"""<section class="section" id="contact" aria-labelledby="contact-title">
-  <div class="wrap contact-grid">
+  <div class="wrap"><div class="contact-grid">
     <div class="contact-copy" data-reveal>
-      <span class="eyebrow">Get In Touch</span>
-      <h2 class="h2" id="contact-title">Let's talk about <em>your project.</em></h2>
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="h2" id="contact-title">Talk to us about your project.</h2>
       <p class="lead">Ready to discuss your project? Our experienced team is here to help you find the perfect materials for your needs.</p>
-      <a class="phone-big" href="tel:{PHONE_TEL}" aria-label="Call {PHONE_DISPLAY}"><span class="ic">{icon('phone')}</span>{PHONE_DISPLAY}</a>
-      <div class="info-grid">
-        <div class="info">
-          <h3>Address</h3>
-          <address>{ADDRESS_HTML}</address>
-        </div>
-        <div class="info">
-          <h3>Opening Hours</h3>
-          <dl class="hours">
-            <dt>Mon to Fri</dt><dd>9:00 to 17:30</dd>
-            <dt>Saturday</dt><dd>Closed</dd>
-            <dt>Sunday</dt><dd>Closed</dd>
-          </dl>
-          <span class="status" data-open-status hidden></span>
-        </div>
-      </div>
-      <div class="contact-ctas">
-        <a class="btn btn-dark" href="tel:{PHONE_TEL}">{icon('phone')}Call Now for Quote</a>
-        <a class="btn btn-line" href="{MAPS}" target="_blank" rel="noopener noreferrer">{icon('pin')}Get Directions</a>
+      <dl class="info">
+        <div><dt>Phone</dt><dd><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></dd></div>
+        <div><dt>Address</dt><dd><address>{ADDRESS_HTML}</address></dd></div>
+        <div><dt>Hours</dt><dd>Monday to Friday, 9:00 to 17:30<br>Saturday and Sunday, Closed<span class="status" data-open-status hidden></span></dd></div>
+      </dl>
+      <div class="actions">
+        <a class="btn" href="tel:{PHONE_TEL}">Call Now for Quote</a>
+        <a class="btn btn-quiet" href="{MAPS}" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>
       </div>
     </div>
-    <div class="map-card" data-reveal style="--d:.12s">
+    <figure class="map" data-reveal>
       <div class="map-frame">
-        <div class="map-fallback" aria-hidden="true"><span class="pin"></span><span>Curra, Riverstick, Co. Cork</span></div>
         <iframe title="Map showing Riverstick Industries, Curra, Riverstick, Co. Cork" src="{MAP_EMBED}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
-      <div class="map-meta">
-        <div>
-          <h3>Find Us Here</h3>
-          <address>Curra, Riverstick, Co. Cork, Ireland, P43 EY24</address>
-        </div>
-        <a class="btn" href="{MAPS}" target="_blank" rel="noopener noreferrer">Open in Google Maps {icon('arrow', ' class="arrow"')}</a>
-      </div>
-      <p class="map-note">Get precise directions and explore the area around our Riverstick location.</p>
-    </div>
-  </div>
+      <figcaption>Find us at Curra, Riverstick, Co. Cork, P43 EY24. <a href="{MAPS}" target="_blank" rel="noopener noreferrer">Get directions</a></figcaption>
+    </figure>
+  </div></div>
 </section>"""
 
 
 def home():
     slides = "".join(
-        f'<div class="hero-slide{" is-active" if i == 0 else ""}">{picture(p["img"], p["name"], eager=(i == 0))}</div>'
+        f'<figure class="hero-slide{" is-active" if i == 0 else ""}">{picture(p["img"], p["name"], eager=(i == 0))}'
+        f'<figcaption>{p["name"]}<span>{p["tagline"]}</span></figcaption></figure>'
         for i, p in enumerate(PRODUCTS))
-    rail = "".join(
-        f'<li{" class=\"is-active\"" if i == 0 else ""}><button type="button" aria-label="Show {p["name"]}">'
-        f'<span class="bar"><i></i></span><span class="num">{i + 1:02d}</span>'
-        f'<span class="t">{p["name"]}</span><span class="d">{p["tagline"]}</span></button></li>'
-        for i, p in enumerate(PRODUCTS))
-    cards = "\n    ".join(product_card(p, i) for i, p in enumerate(PRODUCTS))
-    sectors = ["Contractors", "Landscapers", "Facility Managers", "Garden Beds", "Stables &amp; Horse Walkers",
-               "Gym Flooring", "Workshops", "Agriculture", "Patios &amp; Walkways", "Commercial Spaces"]
-    marquee = "".join(f"<span>{s}</span>" for s in sectors) * 2
+    dots = "".join(f'<button type="button" aria-label="Show {p["name"]}"{" class=\"is-active\"" if i == 0 else ""}></button>' for i, p in enumerate(PRODUCTS))
+    cards = "\n    ".join(product_card(p) for p in PRODUCTS)
     return head("Riverstick Industries | Premium Industrial Materials | Cork, Ireland",
                 "Premium bark mulch, rubber matting, horse walker matting and rubber bricks. Quality Irish industrial materials since 1968, with expert support and fast delivery across Cork.",
                 "/", preload="bark-mulch") + header("home") + f"""
 <main id="main">
-<section class="hero" data-carousel aria-roledescription="carousel" aria-label="Our products">
-  <div class="hero-slides">{slides}</div>
-  <div class="hero-body">
-    <div class="wrap">
-      <div class="hero-copy">
-        <span class="eyebrow light">Est. 1968 · Riverstick, Co. Cork</span>
-        <h1 class="display">Premium industrial materials, <em>built to last.</em></h1>
-        <p class="lead">Bark mulch, rubber matting, horse walker matting and rubber bricks for commercial, industrial and residential clients throughout Ireland and beyond.</p>
-        <div class="hero-ctas">
-          <a class="btn" href="tel:{PHONE_TEL}">{icon('phone')}Call to Order</a>
-          <a class="btn btn-ghost" href="#products">Explore Products {icon('arrow', ' class="arrow"')}</a>
+<section class="intro">
+  <div class="wrap">
+    <div class="intro-grid">
+      <h1 class="display">Premium industrial materials, made to last.</h1>
+      <div class="intro-side">
+        <p class="lead">Bark mulch, rubber matting, horse walker matting and rubber bricks for commercial, industrial and residential clients. Supplied from Riverstick, Co. Cork since 1968.</p>
+        <div class="actions">
+          <a class="btn" href="tel:{PHONE_TEL}">Call to Order</a>
+          <a class="btn btn-quiet" href="#products">View products</a>
         </div>
       </div>
     </div>
   </div>
-  <nav class="hero-rail" aria-label="Carousel navigation"><div class="wrap"><ol>{rail}</ol></div></nav>
+  <div class="wrap">
+    <div class="hero" data-carousel aria-roledescription="carousel" aria-label="Our products">
+      {slides}
+      <div class="dots" role="group" aria-label="Carousel navigation">{dots}</div>
+    </div>
+  </div>
 </section>
 
-<section class="trust" aria-label="Why Riverstick">
+<section class="facts" aria-label="Why Riverstick">
   <div class="wrap">
-    <div class="trust-item"><span class="ic">{icon('award')}</span><span>Since 1968<small>Over five decades of trust</small></span></div>
-    <div class="trust-item"><span class="ic">{icon('shield')}</span><span>Quality Guaranteed<small>Built to the highest standards</small></span></div>
-    <div class="trust-item"><span class="ic">{icon('truck')}</span><span>Fast Delivery<small>Across Cork and beyond</small></span></div>
-    <div class="trust-item"><span class="ic">{icon('support')}</span><span>Expert Support<small>Talk to our experienced team</small></span></div>
+    <ul>
+      <li><b>Since 1968</b><span>Over five decades in business</span></li>
+      <li><b>Quality Guaranteed</b><span>Built to the highest standards</span></li>
+      <li><b>Fast Delivery</b><span>Across Cork and beyond</span></li>
+      <li><b>Expert Support</b><span>An experienced team on hand</span></li>
+    </ul>
   </div>
 </section>
 
 <section class="section" id="products" aria-labelledby="products-title">
   <div class="wrap">
-    <div class="section-head">
-      <div data-reveal>
-        <span class="eyebrow">Our Product Range</span>
-        <h2 class="h2" id="products-title">Materials for every <em>surface and setting.</em></h2>
-      </div>
-      <p class="lead" data-reveal style="--d:.1s">Discover our comprehensive selection of premium industrial materials, each crafted to meet the highest standards of quality and durability.</p>
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Our product range</p>
+      <h2 class="h2" id="products-title">Four materials, one standard.</h2>
+      <p class="lead">Discover our comprehensive selection of premium industrial materials, each crafted to meet the highest standards of quality and durability.</p>
     </div>
     <div class="products">
     {cards}
@@ -372,29 +343,17 @@ def home():
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true"><div class="marquee-track">{marquee}</div></div>
-
-<section class="section on-dark about" id="about" aria-labelledby="about-title">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-copy" data-reveal>
-        <span class="eyebrow">Our Story</span>
-        <h2 class="h2" id="about-title">Industrial excellence <em>since 1968.</em></h2>
-        <p>Riverstick Industries has been a trusted name in premium industrial materials for over five decades. We specialise in providing high-quality bark mulch, rubber matting, and specialised flooring solutions to commercial, industrial, and residential clients.</p>
-        <p>Our commitment to quality, reliability, and customer service has made us the preferred choice for contractors, landscapers, and facility managers throughout Ireland and beyond.</p>
-      </div>
-      <div class="about-visual" data-reveal style="--d:.12s" aria-hidden="true">
-        <span class="ring"></span>
-        <img src="/images/logo-mark.webp" width="222" height="240" alt="" loading="lazy">
-        <span class="year">1968</span>
-      </div>
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="wrap"><div class="about-grid">
+    <div data-reveal>
+      <p class="eyebrow">Our story</p>
+      <h2 class="h2" id="about-title">Industrial excellence since 1968.</h2>
     </div>
-    <div class="pillars">
-      <div class="pillar" data-reveal><span class="ic">{icon('shield')}</span><h3>Quality Guaranteed</h3><p>Every material crafted to meet the highest standards of quality and durability.</p></div>
-      <div class="pillar" data-reveal style="--d:.08s"><span class="ic">{icon('truck')}</span><h3>Fast Delivery</h3><p>Reliable delivery across Cork, with collection also available on bark mulch.</p></div>
-      <div class="pillar" data-reveal style="--d:.16s"><span class="ic">{icon('support')}</span><h3>Expert Support</h3><p>An experienced team on hand to help you find the perfect materials for your needs.</p></div>
+    <div class="about-copy" data-reveal>
+      <p>Riverstick Industries has been a trusted name in premium industrial materials for over five decades. We specialise in providing high-quality bark mulch, rubber matting, and specialised flooring solutions to commercial, industrial, and residential clients.</p>
+      <p>Our commitment to quality, reliability, and customer service has made us the preferred choice for contractors, landscapers, and facility managers throughout Ireland and beyond.</p>
     </div>
-  </div>
+  </div></div>
 </section>
 
 {contact_section()}
@@ -404,18 +363,13 @@ def home():
 
 def product_page(idx):
     p = PRODUCTS[idx]
-    benefits = "".join(
-        f'<div class="benefit" data-reveal style="--d:{(i % 2) * .08:.2f}s"><div class="top"><span class="ic">{icon("check")}</span>'
-        f'<span class="n">{i + 1:02d}</span></div><h3>{b}</h3></div>' for i, b in enumerate(p["benefits"]))
-    items = "".join(f"<li>{x}</li>" for x in p["list"])
-    details = f'<div class="detail" data-reveal><h3>{p["list_title"]}</h3><ul>{items}</ul></div>'
+    benefits = "".join(f'<li>{icon("check")}<span>{b}</span></li>' for b in p["benefits"])
+    cols = f'<div class="spec"><h3>{p["list_title"]}</h3><ul>{"".join(f"<li>{x}</li>" for x in p["list"])}</ul></div>'
     if p.get("delivery"):
-        details += f'<div class="detail" data-reveal style="--d:.08s"><h3>Delivery &amp; Collection</h3><p>{p["delivery"]}</p></div>'
+        cols += f'<div class="spec"><h3>Delivery &amp; collection</h3><p>{p["delivery"]}</p></div>'
     if p.get("note"):
-        details += (f'<div class="detail dark" data-reveal style="--d:.16s"><span class="leaf">{icon("leaf")}</span>'
-                    f'<p>{p["note"]}</p></div>')
-    others = "\n    ".join(product_card(o, j, small=True).replace(f'<span class="tag">{j + 1:02d}</span>', f'<span class="tag">{PRODUCTS.index(o) + 1:02d}</span>')
-                           for j, o in enumerate([x for x in PRODUCTS if x is not p]))
+        cols += f'<div class="spec"><h3>Materials</h3><p>{p["note"]}</p></div>'
+    others = "\n    ".join(product_card(o, short=True, sizes="(max-width: 900px) 100vw, 33vw") for o in PRODUCTS if o is not p)
     eyebrow = p.get("eyebrow", p["name"])
     crumbs_ld = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": SITE + "/"},
@@ -427,60 +381,59 @@ def product_page(idx):
     title = f"{p['name']} | Riverstick Industries, Cork"
     return head(title, p["meta"], f"/{p['slug']}", preload=p["img"], extra_ld=[crumbs_ld, product_ld]) + header("products") + f"""
 <main id="main">
-<section class="p-hero">
-  {picture(p['img'], p['name'], eager=True)}
+<section class="intro">
   <div class="wrap">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a>{icon('chev')}<a href="/#products">Products</a>{icon('chev')}<span aria-current="page">{p['short']}</span></nav>
-    <div class="hero-copy">
-      <span class="eyebrow light">{eyebrow}</span>
-      <h1 class="display">{p['h1']}</h1>
-      <span class="kicker">{p['kicker']}</span>
-      <p class="lead">{p['lead']}</p>
-      <div class="hero-ctas">
-        <a class="btn" href="tel:{PHONE_TEL}">{icon('phone')}Call to Enquire</a>
-        <a class="btn btn-ghost" href="#details">Learn More {icon('arrow', ' class="arrow"')}</a>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="/#products">Products</a><span>/</span><span aria-current="page">{p['short']}</span></nav>
+    <div class="intro-grid">
+      <div>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 class="display">{p['h1']}</h1>
+      </div>
+      <div class="intro-side">
+        <p class="kicker">{p['kicker']}</p>
+        <p class="lead">{p['lead']}</p>
+        <div class="actions">
+          <a class="btn" href="tel:{PHONE_TEL}">Call to Enquire</a>
+          <a class="btn btn-quiet" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>
+        </div>
       </div>
     </div>
   </div>
-  <span class="p-index" aria-hidden="true">{idx + 1:02d}</span>
-</section>
-
-<section class="section" id="details">
   <div class="wrap">
-    <div class="benefits-grid">
-      <div class="sticky" data-reveal>
-        <span class="eyebrow">{p['short']}</span>
-        <h2 class="h2">{p['benefits_title']}</h2>
-        <p class="lead">{p['card']}</p>
-      </div>
-      <div class="benefits">{benefits}</div>
-    </div>
-    <div class="detail-grid">{details}</div>
+    <div class="hero hero-static">{picture(p['img'], p['name'], eager=True)}</div>
   </div>
 </section>
 
-<section class="section on-dark cta-band" aria-labelledby="cta-title">
-  <div class="wrap cta-inner">
+<section class="section">
+  <div class="wrap detail-grid">
     <div data-reveal>
-      <span class="eyebrow">Call to Enquire</span>
-      <h2 class="h2" id="cta-title">Ready to discuss <em>your project?</em></h2>
+      <h2 class="h2">{p['benefits_title']}</h2>
+    </div>
+    <div data-reveal>
+      <ul class="benefits">{benefits}</ul>
+      <div class="specs">{cols}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta" aria-labelledby="cta-title">
+  <div class="wrap"><div class="cta-inner" data-reveal>
+    <div>
+      <h2 class="h2" id="cta-title">Ready to discuss your project?</h2>
       <p class="lead">Our experienced team is here to help you find the perfect materials for your needs.</p>
     </div>
-    <div class="cta-side" data-reveal style="--d:.1s">
-      <a class="phone" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>
-      <small>Monday to Friday, 9:00 to 17:30 · Curra, Riverstick, Co. Cork</small>
-      <a class="btn" href="tel:{PHONE_TEL}">{icon('phone')}Call Now for Quote</a>
+    <div class="actions">
+      <a class="btn" href="tel:{PHONE_TEL}">Call {PHONE_DISPLAY}</a>
+      <span class="muted small">Monday to Friday, 9:00 to 17:30</span>
     </div>
-  </div>
+  </div></div>
 </section>
 
-<section class="section" aria-labelledby="more-title">
+<section class="section section-tight" aria-labelledby="more-title">
   <div class="wrap">
-    <div class="section-head">
-      <div data-reveal>
-        <span class="eyebrow">Our Product Range</span>
-        <h2 class="h2" id="more-title">Explore the <em>full range.</em></h2>
-      </div>
+    <div class="row-head" data-reveal>
+      <h2 class="h3" id="more-title">Also from Riverstick</h2>
+      <a class="text-link" href="/#products">All products</a>
     </div>
     <div class="more-grid">
     {others}
@@ -493,14 +446,14 @@ def product_page(idx):
 
 def not_found():
     return head("Page not found | Riverstick Industries", "The page you were looking for could not be found.", "/404") + header() + f"""
-<main id="main" class="on-dark nf">
-  <div>
-    <span class="eyebrow">Error 404</span>
-    <h1 class="display" style="margin-top:22px">This page has <em>moved on.</em></h1>
-    <p class="lead">The page you were looking for doesn't exist. Head back home or give us a call and we'll point you in the right direction.</p>
-    <div class="hero-ctas" style="justify-content:center">
-      <a class="btn" href="/">Back to Home {icon('arrow', ' class="arrow"')}</a>
-      <a class="btn btn-ghost" href="tel:{PHONE_TEL}">{icon('phone')}{PHONE_DISPLAY}</a>
+<main id="main" class="nf">
+  <div class="wrap">
+    <p class="eyebrow">404</p>
+    <h1 class="display">This page could not be found.</h1>
+    <p class="lead">Head back home, or give us a call and we'll point you in the right direction.</p>
+    <div class="actions">
+      <a class="btn" href="/">Back to home</a>
+      <a class="btn btn-quiet" href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>
     </div>
   </div>
 </main>
