@@ -14,12 +14,18 @@ def a(h,t,cls=''):
 def tag(t):return f'<p class="eyebrow">{t}</p>'
 def brand():
  return '<a href="/" class="brand" aria-label="Riverstick Industries home"><span class="mark" aria-hidden="true">R<span>.</span></span><span>RIVERSTICK<small>INDUSTRIES</small></span></a>'
+def icons(markup):
+ paths={'↗':'M3 9 9 3M3 3h6v6','↓':'M6 2v8M2 6l4 4 4-4','←':'M10 6H2m4-4L2 6l4 4'}
+ for char,path in paths.items():
+  svg=f'<svg class="arrow-icon" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="{path}" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+  markup=markup.replace(char,svg)
+ return markup
 def shell(title,description,route,body,img,product=None):
  url=BASE+route
  schema={'@context':'https://schema.org','@type':'LocalBusiness','@id':BASE+'/#business','name':'Riverstick Industries','url':BASE+'/','telephone':'+353214771362','foundingDate':'1968','image':BASE+'/images/riverstick_industries_logo_transparent.png','address':{'@type':'PostalAddress','streetAddress':'Curra, Riverstick','addressRegion':'Co. Cork','postalCode':'P43 EY24','addressCountry':'IE'},'openingHours':'Mo-Fr 09:00-17:30'}
  if product:
   schema={'@context':'https://schema.org','@graph':[schema,{'@type':'Product','name':product,'url':url,'image':BASE+img,'description':description,'brand':{'@id':BASE+'/#business'}}]}
- return f'''<!doctype html>
+ return icons(f'''<!doctype html>
 <html lang="en-IE">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -37,7 +43,7 @@ def shell(title,description,route,body,img,product=None):
 {body}
 <footer><div class="wrap foot"><div>{brand()}<p>Materials for landscapes, workplaces and equestrian spaces.</p></div><div class="footlinks">{a('/#products','Products')}{a('/#about','About')}{a('/#contact','Contact')}</div><a class="credit" href="https://donworthstudio.ie"><img src="/images/donworth-d-emblem.svg" width="21" height="21" alt=""> Donworth Studio</a></div><div class="wrap legal">© Riverstick Industries <span>CURRA · RIVERSTICK · CORK</span></div></footer>
 </body></html>
-'''
+''')
 def card(i,p):
  slug,title,cat,img,_,desc,*_=p
  return f'''<a class="material" href="/{slug}"><div class="materialshot"><img loading="lazy" src="/images/{img}-hero.webp" alt=""></div><div class="cardcopy">{tag(f'<span>0{i}</span> / {cat}')}<h3>{title}</h3><p>{desc}</p><span class="card-arrow" aria-hidden="true">↗</span></div></a>'''
