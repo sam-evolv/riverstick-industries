@@ -8,8 +8,11 @@ from html import escape
 from pathlib import Path
 import json
 import datetime
+import hashlib
 
 ROOT = Path(__file__).resolve().parent.parent
+# Cache-busting version: changes whenever CSS, JS or images change
+ASSET_V = hashlib.sha1(b"".join((ROOT / f).read_bytes() for f in ["css/site.css", "js/site.js", "images/logo-wordmark.webp", "images/logo-mark.webp"])).hexdigest()[:10]
 SITE = "https://www.riverstickindustries.ie"
 PHONE_DISPLAY = "021 477 1362"
 PHONE_TEL = "+353214771362"
@@ -162,7 +165,7 @@ def head(title, desc, path, preload=None, extra_ld=None):
 <meta name="twitter:image" content="{SITE}/images/og-image.jpg">
 {pre}
 {FONTS}
-<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/site.css?v={ASSET_V}">
 <script>document.documentElement.classList.add('js')</script>
 <script type="application/ld+json">{json.dumps(ld if len(ld) > 1 else ld[0], separators=(',', ':'))}</script>
 </head>"""
@@ -176,8 +179,8 @@ def header(active=None):
 <header class="header">
   <div class="wrap header-inner">
     <a class="brand" href="/" aria-label="Riverstick Industries home">
-      <img class="brand-mark" src="/images/logo-mark.webp" width="50" height="54" alt="">
-      <img class="brand-word" src="/images/logo-wordmark.webp" width="196" height="52" alt="Riverstick Industries">
+      <img class="brand-mark" src="/images/logo-mark.webp" width="54" height="58" alt="">
+      <img class="brand-word" src="/images/logo-wordmark.webp" width="218" height="58" alt="Riverstick Industries">
     </a>
     <nav class="nav" aria-label="Main navigation">
       <a href="/"{cur('home')}>Home</a>
@@ -242,7 +245,7 @@ def footer():
   </div>
 </footer>
 <a class="fab" href="tel:{PHONE_TEL}" aria-label="Call Riverstick Industries on {PHONE_DISPLAY}">{icon('phone')}</a>
-<script src="/js/site.js" defer></script>
+<script src="/js/site.js?v={ASSET_V}" defer></script>
 </body>
 </html>
 """

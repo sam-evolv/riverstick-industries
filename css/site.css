@@ -129,14 +129,12 @@ a:hover > .link-arrow svg, .link-arrow:hover svg { transform: translateX(4px); }
 .header-inner { position: relative; display: flex; align-items: center; justify-content: space-between; height: 80px; transition: height .4s var(--ease); }
 .header.is-solid .header-inner { height: 68px; }
 .brand { display: flex; align-items: center; gap: 12px; }
-.brand img { height: auto; filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
-.brand { gap: 14px; }
-.brand .brand-mark { width: 50px; }
-.brand .brand-word { width: 196px; }
-.header.is-solid .brand-mark { width: 44px; }
-.header.is-solid .brand-word { width: 172px; }
-.brand img { transition: width .4s var(--ease); }
-@media (max-width: 640px) { .brand { gap: 10px; } .brand .brand-mark, .header.is-solid .brand-mark { width: 40px; } .brand .brand-word, .header.is-solid .brand-word { width: 156px; } }
+.brand img { filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+/* Mark and lettering share one height so their tops and bottoms line up */
+.brand { gap: 14px; --logo-h: 58px; }
+.header.is-solid .brand { --logo-h: 50px; }
+.brand .brand-mark, .brand .brand-word { height: var(--logo-h); width: auto; transition: height .4s var(--ease); }
+@media (max-width: 640px) { .brand, .header.is-solid .brand { gap: 10px; --logo-h: 44px; } }
 .brand-name { display: flex; flex-direction: column; line-height: 1; }
 .brand-name b { font-family: var(--serif); font-weight: 400; font-size: 23px; letter-spacing: .01em; }
 .brand-name small { font-size: 10px; letter-spacing: .26em; text-transform: uppercase; color: var(--gold-2); margin-top: 5px; font-weight: 600; }
