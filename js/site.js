@@ -9,7 +9,7 @@
   var fab = document.querySelector('.fab');
   function onScroll() {
     var y = window.scrollY || 0;
-    if (header) header.classList.toggle('is-solid', y > 8);
+    if (header) header.classList.toggle('is-solid', y > 24);
     if (fab) fab.classList.toggle('is-visible', y > window.innerHeight * 0.6);
   }
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -32,21 +32,38 @@
     window.addEventListener('resize', function () { if (window.innerWidth > 900) setMenu(false); });
   }
 
-  /* Hero carousel: slow crossfade, dots to pick a slide */
+  /* Hero carousel */
   var hero = document.querySelector('.hero[data-carousel]');
   if (hero) {
     var slides = hero.querySelectorAll('.hero-slide');
-    var dots = hero.querySelectorAll('.dots button');
-    var DUR = 6000, idx = 0, timer = null;
+    var items = hero.querySelectorAll('.hero-rail li');
+    var DUR = 6500, idx = 0, timer = null, paused = false;
+    hero.style.setProperty('--dur', DUR + 'ms');
     function go(n) {
       idx = (n + slides.length) % slides.length;
       slides.forEach(function (s, i) { s.classList.toggle('is-active', i === idx); s.setAttribute('aria-hidden', i === idx ? 'false' : 'true'); });
-      dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); d.setAttribute('aria-current', i === idx ? 'true' : 'false'); });
-      clearTimeout(timer);
-      if (!reduce) timer = setTimeout(function () { go(idx + 1); }, DUR);
+      items.forEach(function (it, i) {
+        var on = i === idx;
+        it.classList.toggle('is-active', on);
+        var b = it.querySelector('button');
+        if (b) b.setAttribute('aria-current', on ? 'true' : 'false');
+        var bar = it.querySelector('.bar i');
+        if (bar && on) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+      });
+      schedule();
     }
-    dots.forEach(function (d, i) { d.addEventListener('click', function () { go(i); }); });
-    document.addEventListener('visibilitychange', function () { if (document.hidden) clearTimeout(timer); else go(idx); });
+    function schedule() {
+      clearTimeout(timer);
+      if (reduce || paused) return;
+      timer = setTimeout(function () { go(idx + 1); }, DUR);
+    }
+    items.forEach(function (it, i) {
+      var b = it.querySelector('button');
+      if (b) b.addEventListener('click', function () { go(i); });
+    });
+    hero.addEventListener('mouseenter', function () { paused = true; hero.classList.add('is-paused'); clearTimeout(timer); });
+    hero.addEventListener('mouseleave', function () { paused = false; hero.classList.remove('is-paused'); go(idx); });
+    document.addEventListener('visibilitychange', function () { if (document.hidden) clearTimeout(timer); else schedule(); });
     go(0);
   }
 
